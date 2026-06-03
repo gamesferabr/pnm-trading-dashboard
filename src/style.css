@@ -1,0 +1,117 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --color-pnm-950: #0a1612;
+  --color-pnm-900: #0f2219;
+  --color-pnm-800: #163528;
+  --color-pnm-700: #1e4a38;
+  --color-pnm-600: #256349;
+  --color-pnm-500: #2d7a5a;
+  --color-pnm-400: #3d9970;
+  --color-pnm-300: #5cb88a;
+  --color-pnm-200: #8fd4b0;
+  --color-pnm-100: #c8ecd9;
+  --color-pnm-50: #ecf9f2;
+  --color-surface: #f5f4f0;
+  --color-accent: #22c55e;
+  --color-accent-soft: #4ade80;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-surface);
+  color: #1a2e24;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5d0;
+  border-radius: 999px;
+}
+
+.panel-card {
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(15, 34, 25, 0.06), 0 4px 16px rgba(15, 34, 25, 0.04);
+}
+
+.icon-box {
+  display: flex;
+  height: 2.25rem;
+  width: 2.25rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--color-pnm-50);
+  color: var(--color-pnm-700);
+}
+
+.nav-section-label {
+  padding: 0 12px;
+  margin-top: 20px;
+  margin-bottom: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(143, 212, 176, 0.55);
+}
+
+.nav-section-label:first-child {
+  margin-top: 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+.nav-link-active {
+  background: rgba(61, 82, 69, 0.85);
+  color: #ffffff;
+}
+
+.card-hover {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card-hover:hover {
+  box-shadow: 0 4px 20px rgba(15, 34, 25, 0.1);
+  transform: translateY(-1px);
+}
