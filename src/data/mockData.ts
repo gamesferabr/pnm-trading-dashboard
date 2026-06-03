@@ -3,7 +3,9 @@ import type {
   Campaign,
   Lead,
   LeadStatus,
+  ProductInfo,
   ProductTrail,
+  PromptVersion,
 } from '@/types'
 
 export const PRODUCT_LABELS: Record<ProductTrail, string> = {
@@ -63,6 +65,60 @@ export const leadsByProduct: Record<ProductTrail, number> = {
   texas_pnm: 98,
   mercado_futuro: 167,
   geti: 80,
+}
+
+export const PRODUCT_INFO: ProductInfo[] = [
+  {
+    trail: 'mentoria_grafica',
+    audience: 'Pecuaristas que querem aprender a ler mercado futuro — foco educacional',
+  },
+  {
+    trail: 'texas_pnm',
+    audience: 'Confinamento e engorda intensiva — foco em gestão de produção',
+  },
+  {
+    trail: 'mercado_futuro',
+    audience: 'Traders de commodities agrícolas — linguagem técnica e financeira',
+  },
+  {
+    trail: 'geti',
+    audience: 'Programa GETI — produtor que busca formação completa PNM',
+  },
+]
+
+export const promptVersionHistory: PromptVersion[] = [
+  {
+    id: 'pv-1',
+    trail: 'mercado_futuro',
+    author: 'Admin',
+    date: '2026-06-01T10:00:00',
+    summary: 'Inclusão de referência CBOT e lives do Renan',
+  },
+  {
+    id: 'pv-2',
+    trail: 'texas_pnm',
+    author: 'Admin',
+    date: '2026-05-20T14:30:00',
+    summary: 'Ajuste de qualificação com nutrição (Gustavo)',
+  },
+  {
+    id: 'pv-3',
+    trail: 'geti',
+    author: 'Admin',
+    date: '2026-05-15T09:00:00',
+    summary: 'Atualização turma GETI jul/2026',
+  },
+]
+
+export const marketingStats = {
+  campaignsSent: 12,
+  avgResponseRate: 28.4,
+  messagesThisMonth: 1847,
+  scheduled: 2,
+  messagesThisHour: 34,
+  hourlyLimit: 50,
+  dailyLimit: 200,
+  messagesToday: 127,
 }
 
 export const hotLeads = [
@@ -164,6 +220,12 @@ export const mockLeads: Lead[] = [
     score: 92,
     qualification: { nome: true, dor: true, experiencia: true, rebanho: true, disponibilidade: true, budget: true },
     notes: 'Opera boi e milho. Quer acompanhar live diária do Renan.',
+    stageHistory: [
+      { id: 'sh-1', from: null, to: 'novo', changedBy: 'ia', timestamp: '2026-05-28T09:12:00' },
+      { id: 'sh-2', from: 'novo', to: 'em_atendimento', changedBy: 'ia', timestamp: '2026-05-28T09:13:00' },
+      { id: 'sh-3', from: 'em_atendimento', to: 'qualificado', changedBy: 'ia', timestamp: '2026-06-02T11:00:00' },
+      { id: 'sh-4', from: 'qualificado', to: 'handoff', changedBy: 'ia', timestamp: '2026-06-03T14:48:00' },
+    ],
     timeline: [
       { id: 't1', type: 'lead', message: 'Vi no Instagram de vocês sobre mercado futuro. Quanto custa?', timestamp: '2026-06-03T14:20:00' },
       { id: 't2', type: 'ia', message: 'Olá, Marcos! Sou a assistente da PNM Trading. Você já opera contratos de boi ou milho?', timestamp: '2026-06-03T14:20:28' },
@@ -251,6 +313,11 @@ export const mockLeads: Lead[] = [
     score: 95,
     qualification: { nome: true, dor: true, experiencia: true, rebanho: true, disponibilidade: true, budget: true },
     notes: 'Indicação do Fabiano. Prioridade alta.',
+    stageHistory: [
+      { id: 'sh-5', from: 'novo', to: 'em_atendimento', changedBy: 'ia', timestamp: '2026-05-20T10:05:00' },
+      { id: 'sh-6', from: 'em_atendimento', to: 'qualificado', changedBy: 'ia', timestamp: '2026-05-25T16:00:00' },
+      { id: 'sh-7', from: 'qualificado', to: 'handoff', changedBy: 'humano', author: 'Cinthia', timestamp: '2026-06-03T14:22:00' },
+    ],
     timeline: [],
   },
   {
@@ -271,6 +338,10 @@ export const mockLeads: Lead[] = [
     score: 90,
     qualification: { nome: true, dor: true, experiencia: true, rebanho: true, disponibilidade: true, budget: true },
     notes: 'Lead reativado do RD Station.',
+    stageHistory: [
+      { id: 'sh-8', from: 'perdido', to: 'em_atendimento', changedBy: 'ia', timestamp: '2026-06-01T08:00:00' },
+      { id: 'sh-9', from: 'em_atendimento', to: 'qualificado', changedBy: 'ia', timestamp: '2026-06-03T13:58:00' },
+    ],
     timeline: [],
   },
   {
@@ -448,6 +519,63 @@ export function formatRelativeTime(iso: string): string {
 
 export function getLeadById(id: string): Lead | undefined {
   return mockLeads.find((lead) => lead.id === id)
+}
+
+export const reactivationSamples: Record<
+  30 | 60 | 90,
+  { id: string; name: string; product: ProductTrail; lastContact: string; location?: string }[]
+> = {
+  30: [
+    { id: 'r-30-1', name: 'Fazenda Boa Vista', product: 'texas_pnm', lastContact: '2026-05-04T08:00:00', location: 'Sinop, MT' },
+    { id: 'r-30-2', name: 'Agro Nova Era', product: 'mercado_futuro', lastContact: '2026-05-02T14:00:00', location: 'Rio Verde, GO' },
+    { id: 'r-30-3', name: 'Márcio Alves', product: 'mentoria_grafica', lastContact: '2026-05-01T10:30:00', location: 'Goiânia, GO' },
+    { id: 'r-30-4', name: 'Cooperativa Vale Verde', product: 'geti', lastContact: '2026-04-28T16:00:00', location: 'Dourados, MS' },
+  ],
+  60: [
+    { id: 'r-60-1', name: 'Pedro Henrique', product: 'mercado_futuro', lastContact: '2026-04-04T09:00:00', location: 'Anápolis, GO' },
+    { id: 'r-60-2', name: 'Fazenda São José', product: 'texas_pnm', lastContact: '2026-04-01T11:00:00', location: 'Jataí, GO' },
+    { id: 'r-60-3', name: 'Renata Souza', product: 'mentoria_grafica', lastContact: '2026-03-28T08:00:00', location: 'Campo Grande, MS' },
+  ],
+  90: [
+    { id: 'r-90-1', name: 'Lucas Ferreira', product: 'mentoria_grafica', lastContact: '2026-03-05T09:00:00', location: 'Catalão, GO' },
+    { id: 'r-90-2', name: 'Grupo Agro Sul', product: 'mercado_futuro', lastContact: '2026-03-01T14:00:00', location: 'Lucas do Rio Verde, MT' },
+    { id: 'r-90-3', name: 'Eduardo Prado', product: 'geti', lastContact: '2026-02-20T10:00:00', location: 'Cuiabá, MT' },
+    { id: 'r-90-4', name: 'Fazenda Esperança', product: 'texas_pnm', lastContact: '2026-02-15T16:30:00', location: 'Itumbiara, GO' },
+  ],
+}
+
+export function getLeadsByColdWindow(days: 30 | 60 | 90): Lead[] {
+  const fromMock = mockLeads.filter((lead) => lead.coldWindow === days)
+  const samples = reactivationSamples[days]
+  const sampleAsLeads: Lead[] = samples
+    .filter((s) => !fromMock.some((l) => l.id === s.id))
+    .map((s) => ({
+      id: s.id,
+      name: s.name,
+      phone: '',
+      email: '',
+      status: 'em_atendimento' as LeadStatus,
+      product: s.product,
+      origin: 'rd_station' as const,
+      aiStatus: 'ativa' as const,
+      lastContact: s.lastContact,
+      createdAt: s.lastContact,
+      hotLead: false,
+      coldWindow: days,
+      location: s.location ?? 'Base RD Station',
+      score: 0,
+      qualification: {
+        nome: true,
+        dor: false,
+        experiencia: false,
+        rebanho: false,
+        disponibilidade: false,
+        budget: false,
+      },
+      notes: '',
+      timeline: [],
+    }))
+  return [...fromMock, ...sampleAsLeads]
 }
 
 export function getLeadsByStatus(status: LeadStatus): Lead[] {

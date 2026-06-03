@@ -33,6 +33,15 @@ export interface QualificationChecklist {
   budget: boolean
 }
 
+export interface StageHistoryEntry {
+  id: string
+  from: LeadStatus | null
+  to: LeadStatus
+  changedBy: 'ia' | 'humano'
+  author?: string
+  timestamp: string
+}
+
 export interface Lead {
   id: string
   name: string
@@ -52,6 +61,20 @@ export interface Lead {
   qualification: QualificationChecklist
   notes: string
   timeline: TimelineEvent[]
+  stageHistory?: StageHistoryEntry[]
+}
+
+export interface ProductInfo {
+  trail: ProductTrail
+  audience: string
+}
+
+export interface PromptVersion {
+  id: string
+  trail: ProductTrail
+  author: string
+  date: string
+  summary: string
 }
 
 export interface ActivityItem {
