@@ -46,9 +46,101 @@ export const dashboardStats = {
   qualificationRate: 34.2,
   activeConversations: 23,
   handoffsToday: 7,
+  pendingHandoffs: 7,
+  salesThisMonth: 23,
+  salesVariation: 8.6,
+  messagesToday: 347,
+  audioToday: 12,
   reactivation30: 89,
   reactivation60: 54,
   reactivation90: 112,
+  reactivationActive: 255,
+  rdStationBase: 500,
+  newLeadsToday: 8,
+  qualifiedToday: 5,
+}
+
+export const leadsByOrigin: Record<string, number> = {
+  instagram: 198,
+  whatsapp: 142,
+  formulario: 67,
+  indicacao: 38,
+  rd_station: 42,
+}
+
+export const ORIGIN_LABELS: Record<string, string> = {
+  instagram: 'Instagram @pnm.trading',
+  whatsapp: 'WhatsApp direto',
+  formulario: 'Formulário / Site',
+  indicacao: 'Indicação sócio',
+  rd_station: 'Base RD Station',
+}
+
+export const funnelConversion = [
+  { from: 'Novo', to: 'Em atendimento', rate: 87.3, count: 54 },
+  { from: 'Em atendimento', to: 'Qualificado', rate: 42.1, count: 33 },
+  { from: 'Qualificado', to: 'Handoff', rate: 68.5, count: 31 },
+  { from: 'Handoff', to: 'Fechado', rate: 31.2, count: 6 },
+]
+
+export const weeklySummary = {
+  newLeads: 48,
+  qualified: 16,
+  closed: 9,
+  lost: 11,
+  reactivated: 23,
+  handoffs: 18,
+}
+
+export const pendingHandoffs = [
+  {
+    id: 'l-001',
+    name: 'Marcos Aurélio',
+    product: 'mercado_futuro' as ProductTrail,
+    waiting: '12 min',
+    herdSize: '480 cabeças',
+    score: 92,
+  },
+  {
+    id: 'l-005',
+    name: 'João Batista',
+    product: 'mercado_futuro' as ProductTrail,
+    waiting: '38 min',
+    herdSize: '600 cabeças',
+    score: 95,
+  },
+  {
+    id: 'l-002',
+    name: 'Fazenda Santa Helena',
+    product: 'texas_pnm' as ProductTrail,
+    waiting: '1h 04',
+    herdSize: '850 cabeças',
+    score: 88,
+  },
+]
+
+export const partnerWorkload = [
+  { name: 'Fabiano', role: 'Pecuária · Texas PNM', handoffs: 3, qualified: 8, focus: 'Confinamento' },
+  { name: 'Gustavo', role: 'Nutrição animal', handoffs: 2, qualified: 5, focus: 'Texas PNM · GETI' },
+  { name: 'Renan', role: 'Trading · Mercado Futuro', handoffs: 5, qualified: 12, focus: 'Boi / Milho' },
+  { name: 'Cinthia', role: 'Atendimento humano', handoffs: 7, qualified: 0, focus: 'Handoffs ativos' },
+]
+
+export const productPerformance = [
+  { trail: 'mercado_futuro' as ProductTrail, leads: 167, qualified: 58, closed: 52, rate: 31.1 },
+  { trail: 'mentoria_grafica' as ProductTrail, leads: 142, qualified: 41, closed: 38, rate: 26.8 },
+  { trail: 'texas_pnm' as ProductTrail, leads: 98, qualified: 32, closed: 28, rate: 28.6 },
+  { trail: 'geti' as ProductTrail, leads: 80, qualified: 24, closed: 16, rate: 20.0 },
+]
+
+export const agentLiveStatus = {
+  online: true,
+  whatsappConnected: true,
+  routerActive: true,
+  reengagementActive: true,
+  hotLeadAlerts: true,
+  avgFirstResponse: '28s',
+  messagesPerHour: 42,
 }
 
 export const leadsByStatus: Record<LeadStatus, number> = {

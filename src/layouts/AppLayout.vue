@@ -24,16 +24,30 @@ const navSections: NavSection[] = [
     label: 'Operação',
     items: [
       { name: 'Painel', to: '/', icon: 'grid' },
-      { name: 'Pipeline', to: '/pipeline', icon: 'kanban' },
+      { name: 'Leads', to: '/leads', icon: 'users' },
+      { name: 'Funil', to: '/pipeline', icon: 'funnel' },
+      { name: 'Conversas', to: '/conversas', icon: 'message' },
+      { name: 'Agenda', to: '/agenda', icon: 'calendar' },
     ],
   },
   {
     label: 'Inteligência',
-    items: [{ name: 'Agente IA', to: '/agente', icon: 'bot' }],
+    items: [
+      { name: 'Agente IA', to: '/agente', icon: 'bot' },
+      { name: 'Recuperação', to: '/recuperacao', icon: 'refresh' },
+      { name: 'Broadcasts', to: '/marketing', icon: 'megaphone' },
+    ],
   },
   {
-    label: 'Marketing',
-    items: [{ name: 'Broadcasts', to: '/marketing', icon: 'megaphone' }],
+    label: 'Cadastros',
+    items: [{ name: 'Produtos', to: '/produtos', icon: 'package' }],
+  },
+  {
+    label: 'Configurações',
+    items: [
+      { name: 'Integrações', to: '/integracoes', icon: 'plug' },
+      { name: 'Eventos', to: '/eventos', icon: 'pulse' },
+    ],
   },
 ]
 
@@ -41,6 +55,7 @@ const flatNav = computed(() => navSections.flatMap((s) => s.items))
 
 function isActive(to: string): boolean {
   if (to === '/') return route.path === '/'
+  if (to === '/leads') return route.path === '/leads' || /^\/leads\/.+/.test(route.path)
   return route.path === to || route.path.startsWith(`${to}/`)
 }
 
